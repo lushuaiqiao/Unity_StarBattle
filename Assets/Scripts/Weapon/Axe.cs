@@ -19,7 +19,8 @@ public class Axe : Weapon
 
     void Update()
     {
-   
+
+     
         if (isUse)
         {
             lifeTime -= Time.deltaTime;
@@ -28,6 +29,10 @@ public class Axe : Weapon
                 this.transform.parent = null;
                 ObjectPool.me.PutObject(this.gameObject, 0);
             }
+        }
+        else
+        {
+            Drop(!isLand);
         }
     }
 
@@ -45,7 +50,16 @@ public class Axe : Weapon
                 }
             }
         }
+        if (!isUse)
+        {
+            if (collision.tag == "Land")
+            {
+                isLand = true;
+            }
+        }
+
     }
+
     public override void AfterCreate()
     {
         name = "PrebAxe";
@@ -60,28 +74,32 @@ public class Axe : Weapon
     {
         isUse = false;
         isBorn = false;
-        this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        isLand = false;
+        //this.gameObject.GetComponent<Collider2D>().isTrigger = false;
+        //this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         this.transform.parent = null;
-        global.g_weaponCount--;
+
         Tips = null;
     }
     private void OnBecameVisible()
     {
-        if (!isUse)
+        if (!isUse && isBorn)
         {
             isVisible = true;
             Tips.SetActive(false);
         }
-
-
     }
     private void OnBecameInvisible()
     {
-        if (!isUse)
+        if (!isUse && isBorn)
         {
             isVisible = false;
             Tips.gameObject.SetActive(true);
+        }
+        else if (isUse)
+        {
+            isVisible = false;
+            Tips.SetActive(false);
         }
     }
 }

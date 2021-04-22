@@ -7,6 +7,8 @@ public class WeaponCreate : MonoBehaviour
     public float m_createRangeMax;
     public float m_createRangeMin;
     public float m_createSpeed;
+    public float m_createMax;
+    public float m_createCount;
     public bool m_isWork;
     public GameObject[] weaponList;
 
@@ -20,6 +22,15 @@ public class WeaponCreate : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (global.g_weaponCount < m_createMax)
+        {
+            m_isWork = true;
+        }
+        else
+        {
+            m_isWork = false ;
+        }
+        m_createCount = global.g_weaponCount;
         if (m_isWork)
         {
             m_localTime += Time.deltaTime;
@@ -36,6 +47,7 @@ public class WeaponCreate : MonoBehaviour
 
         int weaponType = Random.Range(0, weaponList.Length);
         GameObject weapon = ObjectPool.me.GetObject(weaponList[weaponType], spawnPos, Quaternion.identity);
+
     }
 
 }

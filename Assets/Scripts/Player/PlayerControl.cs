@@ -24,10 +24,13 @@ public class PlayerControl : Player
     }
     void LateUpdate()
     {
-        if (m_mainPlayer.playerID==playerID)
+        if (m_mainPlayer.playerID == playerID)
         {
             Move();
-            Jump();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
         }
     }
     private void Move()
@@ -53,7 +56,7 @@ public class PlayerControl : Player
         {
             m_axis = m_rigidbody.transform.localEulerAngles.z;
             m_currentSpeed = 0;
-      
+
         }
     }
     private void Jump()
@@ -61,13 +64,8 @@ public class PlayerControl : Player
         //跳跃
         if (m_isLand)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                m_isLand = false;
-                m_rigidbody.AddForce(Vector2.up * m_jumpSpeed);
-                
-               
-            }
+            m_isLand = false;
+            m_rigidbody.AddForce(Vector2.up * m_jumpSpeed);
         }
     }
     private void Turn(float inputValue)

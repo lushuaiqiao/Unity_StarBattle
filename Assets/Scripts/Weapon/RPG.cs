@@ -25,7 +25,21 @@ public class RPG : Weapon
             }
 
         }
+        else
+        {
+            Drop(!isLand);
+        }
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isUse)
+        {
+            if (collision.tag == "Land")
+            {
+                isLand = true;
+            }
+        }
     }
 
     public override void AfterCreate()
@@ -41,15 +55,16 @@ public class RPG : Weapon
     {
         isUse = false;
         isBorn = false;
-        this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+        isLand = false;
+        //this.gameObject.GetComponent<Collider2D>().isTrigger = false;
+        //this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         this.transform.parent = null;
-        global.g_weaponCount--;
+     
         Tips = null;
     }
     private void OnBecameVisible()
     {
-        if (!isUse)
+        if (!isUse && isBorn)
         {
             isVisible = true;
             Tips.SetActive(false);
@@ -59,10 +74,15 @@ public class RPG : Weapon
     }
     private void OnBecameInvisible()
     {
-        if (!isUse)
+        if (!isUse && isBorn)
         {
             isVisible = false;
             Tips.gameObject.SetActive(true);
+        }
+        else if (isUse)
+        {
+            isVisible = false;
+            Tips.SetActive(false);
         }
     }
 

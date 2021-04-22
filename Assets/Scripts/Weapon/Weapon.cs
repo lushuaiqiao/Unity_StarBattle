@@ -20,10 +20,19 @@ public class Weapon : MonoBehaviour
     public float fallSpeed = 0;
     [HideInInspector]
     public bool isVisible = false;
+    [HideInInspector]
+    public bool isLand = false;
 
-   
+
 
     public virtual void AfterCreate(){}
     public virtual void BeforeDestroy(){}
+
+    public void Drop(bool isdrop) {
+        if (isdrop)
+        {
+            this.transform.position += new Vector3(0.0f,-5.0f*Time.deltaTime,0.0f);
+        }
+    }
 
 }

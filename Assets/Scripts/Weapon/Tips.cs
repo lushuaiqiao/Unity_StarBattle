@@ -42,27 +42,19 @@ public class Tips : MonoBehaviour
             if (m_weapon.transform.position.x > m_camera.transform.position.x + m_halfWidth)
             {
                 x = m_camera.transform.position.x + m_halfWidth- m_space;
-   
                 this.transform.rotation = Quaternion.Euler(0, 0, 0.0f);
                 m_weaponBlack.transform.localRotation = Quaternion.Euler(0, 0, 225.0f);
-
-
             }
             else if (m_weapon.transform.position.x < m_camera.transform.position.x - m_halfWidth)
             {
                 x = m_camera.transform.position.x - m_halfWidth+ m_space;
-      
                 this.transform.rotation = Quaternion.Euler(0, 0, 180.0f);
                 m_weaponBlack.transform.localRotation = Quaternion.Euler(0, 0, 45.0f);
-
-
             }
             else
             {
                 x = m_weapon.transform.position.x;
             }
-
-
             if (m_weapon.transform.position.y > m_camera.transform.position.y + m_halfWidth)
             {
                 y = m_camera.transform.position.y + m_halfWidth- m_space;
@@ -75,8 +67,7 @@ public class Tips : MonoBehaviour
             {
                 y = m_weapon.transform.position.y;
             }
-
-            this.transform.position = new Vector2(x, y);
+            this.transform.position = new Vector3(x, y,-3.0f);
         }
     }
 }
