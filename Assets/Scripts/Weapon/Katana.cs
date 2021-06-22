@@ -10,6 +10,11 @@ public class Katana : Weapon
     private float m_initDamage = 2.0f;
 
     private GameObject Tips;
+    private void Start()
+    {
+        strName = "太刀";
+        strDetail = "伤害中等 范围大";
+    }
     void OnEnable()
     {
         AfterCreate();
@@ -66,8 +71,6 @@ public class Katana : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;
-        //this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        //this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         this.transform.parent = null;
 
         Tips = null;

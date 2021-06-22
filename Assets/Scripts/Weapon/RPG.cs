@@ -7,6 +7,11 @@ public class RPG : Weapon
     [SerializeField]
     private float m_initLifeTime = 20.0f;
     private GameObject Tips;
+    private void Start()
+    {
+        strName = "火箭筒";
+        strDetail = "可以发射子弹 伤害高";
+    }
     void OnEnable()
     {
         AfterCreate();
@@ -56,8 +61,6 @@ public class RPG : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;
-        //this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        //this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         this.transform.parent = null;
      
         Tips = null;

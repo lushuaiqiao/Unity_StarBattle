@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class Weapon : MonoBehaviour
     public bool isVisible = false;
     [HideInInspector]
     public bool isLand = false;
+    [HideInInspector]
+    public string strName ="";
+    [HideInInspector]
+    public string strDetail="";
+
+
 
 
 
@@ -33,6 +40,10 @@ public class Weapon : MonoBehaviour
         {
             this.transform.position += new Vector3(0.0f,-5.0f*Time.deltaTime,0.0f);
         }
+
+        //Text text;
+        //text = GameObject.Find("text").GetComponent<Text>();
+        //text.text = "11";
     }
 
 }

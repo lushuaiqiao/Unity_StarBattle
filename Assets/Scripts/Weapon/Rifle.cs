@@ -10,6 +10,11 @@ public class Rifle : Weapon
     private float m_initDamage = 2.0f;
 
     private GameObject Tips;
+    private void Start()
+    {
+        strName = "步枪";
+        strDetail = "可以发射子弹 伤害中等";
+    }
     void OnEnable()
     {
         AfterCreate();
@@ -58,8 +63,6 @@ public class Rifle : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;
-        //this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        //this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         this.transform.parent = null;
 
         Tips = null;

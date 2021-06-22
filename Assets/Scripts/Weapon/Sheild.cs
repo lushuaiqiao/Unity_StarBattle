@@ -10,6 +10,12 @@ public class Sheild : Weapon
     private float m_initLifeTime = 20.0f;
 
     private GameObject Tips;
+
+    private void Start()
+    {
+        strName = "盾牌";
+        strDetail = "反弹正面的武器和子弹";
+    }
     void OnEnable()
     {
         AfterCreate();
@@ -88,8 +94,6 @@ public class Sheild : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;
-        //this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        //this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         this.transform.parent = null;
 
         Tips = null;

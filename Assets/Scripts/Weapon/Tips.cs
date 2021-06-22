@@ -21,7 +21,6 @@ public class Tips : MonoBehaviour
         m_weaponBlack = this.transform.Find("Weapon_black").gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         SetPostion();

@@ -11,6 +11,11 @@ public class Axe : Weapon
 
     private GameObject Tips;
 
+    private void Start()
+    {
+        strName = "斧头";
+        strDetail = "伤害巨大 范围较小";
+    }
 
     void OnEnable()
     {
@@ -65,6 +70,7 @@ public class Axe : Weapon
         name = "PrebAxe";
         isBorn = true;
         isUse = false;
+        isLand = false;
         lifeTime = m_initLifeTime;
         damage = m_initDamage;
         global.g_weaponCount++;
@@ -75,8 +81,6 @@ public class Axe : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;
-        //this.gameObject.GetComponent<Collider2D>().isTrigger = false;
-        //this.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
         this.transform.parent = null;
 
         Tips = null;
