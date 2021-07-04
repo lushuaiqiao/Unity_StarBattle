@@ -104,9 +104,11 @@ MonoBehaviour:
   bornPos: {x: 0, y: 0, z: 0}
   fallSpeed: 0
   isVisible: 0
-  g_mainCamera: {fileID: 0}
+  isLand: 0
+  strName: 
+  strDetail: 
   m_initLifeTime: 20
-  m_initDamage: 2
+  m_initDamage: 5
 --- !u!70 &4997073608185656946
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

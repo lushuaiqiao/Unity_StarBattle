@@ -7,11 +7,23 @@ public class RocketBullet : Weapon
     [SerializeField]
     private float m_initLifeTime = 20.0f;
     [SerializeField]
-    private float m_initDamage = 2.0f;
+    private float m_initDamage = 4.0f;
     void OnEnable()
     {
+        EventManager.me.AddEventListener("endgame", (object[] o) => {
+            DestroyObject();
+            return null;
+        });
         AfterCreate();
     }
+    private void OnDisable()
+    {
+        EventManager.me.RemoveEventListener("endgame", (object[] o) => {
+            DestroyObject();
+            return null;
+        });
+    }
+
 
     void Update()
     {
@@ -28,7 +40,7 @@ public class RocketBullet : Weapon
         }
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isUse)
         {
@@ -37,7 +49,7 @@ public class RocketBullet : Weapon
                 int id = collision.GetComponent<Player>().playerID;
                 if (userId != id)
                 {
-                    collision.GetComponent<Player>().playerHp -= damage;
+                    collision.GetComponent<Player>().BeHit(damage);
                     BeforeDestroy();
                     ObjectPool.me.PutObject(this.gameObject, 0);
                 }
@@ -55,5 +67,10 @@ public class RocketBullet : Weapon
     public override void BeforeDestroy()
     {
         isUse = false;
+    }
+    public override void DestroyObject()
+    {
+        BeforeDestroy();
+        ObjectPool.me.PutObject(this.gameObject, 0);
     }
 }

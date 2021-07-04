@@ -7,7 +7,7 @@ public class Katana : Weapon
     [SerializeField]
     private float m_initLifeTime = 20.0f;
     [SerializeField]
-    private float m_initDamage = 2.0f;
+    private float m_initDamage = 3.0f;
 
     private GameObject Tips;
     private void Start()
@@ -17,17 +17,31 @@ public class Katana : Weapon
     }
     void OnEnable()
     {
+        EventManager.me.AddEventListener("endgame", (object[] o) => {
+            isUse = true;
+            lifeTime = 0;
+            return null;
+        });
         AfterCreate();
+    }
+    private void OnDisable()
+    {
+        EventManager.me.RemoveEventListener("endgame", (object[] o) => {
+            isUse = true;
+            lifeTime = 0;
+            return null;
+        });
+        BeforeDestroy();
     }
     void Update()
     {
         if (isUse)
         {
+            Tips.SetActive(false);
             lifeTime -= Time.deltaTime;
             if (lifeTime <= 0)
             {
-                BeforeDestroy();
-                ObjectPool.me.PutObject(this.gameObject, 0);
+                DestroyObject();
             }
         }
         else
@@ -35,7 +49,7 @@ public class Katana : Weapon
             Drop(!isLand);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isUse)
         {
@@ -44,10 +58,14 @@ public class Katana : Weapon
                 int id = collision.GetComponent<Player>().playerID;
                 if (userId != id)
                 {
-                    collision.GetComponent<Player>().playerHp -= damage * Time.deltaTime;
+                    collision.GetComponent<Player>().BeHit(damage * Time.deltaTime);
                 }
             }
         }
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (!isUse)
         {
             if (collision.tag == "Land")
@@ -55,6 +73,7 @@ public class Katana : Weapon
                 isLand = true;
             }
         }
+
     }
     public override void AfterCreate()
     {
@@ -72,31 +91,35 @@ public class Katana : Weapon
         isBorn = false;
         isLand = false;
         this.transform.parent = null;
-
+        global.g_weaponCount--;
         Tips = null;
+    }
+
+    public override void DestroyObject()
+    {
+        BeforeDestroy();
+        ObjectPool.me.PutObject(this.gameObject, 0);
     }
     private void OnBecameVisible()
     {
-        if (!isUse && isBorn)
+        if ((!isUse) && isBorn)
         {
             isVisible = true;
             Tips.SetActive(false);
         }
-
-
-
+        else if (isUse && isBorn)
+        {
+            isVisible = true;
+            Tips.SetActive(false);
+        }
     }
     private void OnBecameInvisible()
     { 
-        if (!isUse && isBorn)
+        if ((!isUse) && isBorn)
         {
             isVisible = false;
-            Tips.gameObject.SetActive(true);
+            Tips.SetActive(true);
         }
-        else if (isUse)
-        {
-            isVisible = false;
-            Tips.SetActive(false);
-        }
+
     }
 }

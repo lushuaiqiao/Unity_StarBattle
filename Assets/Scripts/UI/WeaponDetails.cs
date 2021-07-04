@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponDetails : MonoBehaviour
 {
     public bool isrestart;
-    public float m_lifeTime;
+    public float lifeTime;
 
     private float m_currentTime;
     private bool m_isUse;
@@ -24,7 +24,7 @@ public class WeaponDetails : MonoBehaviour
         if (isrestart)
         {
             m_isUse = true;
-            m_currentTime = m_lifeTime;
+            m_currentTime = lifeTime;
             m_cg.alpha = 1.0f;
             isrestart = false;
         }

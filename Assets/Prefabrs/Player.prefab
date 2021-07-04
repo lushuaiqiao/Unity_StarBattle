@@ -62,6 +62,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   playerHp: 0
+  playerHandGo: []
+  handisUseCount: 0
+  handId: 4
   m_isUse: 0
 --- !u!1 &2912477978680100903
 GameObject:
@@ -189,10 +192,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   playerHp: 0
-  m_rotateSpeed: 200
-  m_maxSpeed: 100
-  m_jumpSpeed: 500
-  m_isLand: 0
+  playerHandGo:
+  - {fileID: 7117727981446466876}
+  - {fileID: 7871269021481503466}
+  - {fileID: 9105362053498755189}
+  - {fileID: 4975516983817846840}
+  - {fileID: 695246509831801082}
+  handisUseCount: 0
+  rotateSpeed: 100
+  maxSpeed: 100
+  jumpSpeed: 500
 --- !u!114 &8979361212249266989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +216,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 3
   playerHp: 0
+  playerHandGo: []
+  handisUseCount: 0
 --- !u!60 &1501327410191901850
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -389,6 +400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   playerHp: 0
+  playerHandGo: []
+  handisUseCount: 0
+  handId: 3
   m_isUse: 0
 --- !u!1 &7117727981446466876
 GameObject:
@@ -452,6 +466,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   playerHp: 0
+  playerHandGo: []
+  handisUseCount: 0
+  handId: 0
   m_isUse: 0
 --- !u!1 &7871269021481503466
 GameObject:
@@ -515,6 +532,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   playerHp: 0
+  playerHandGo: []
+  handisUseCount: 0
+  handId: 1
   m_isUse: 0
 --- !u!1 &9105362053498755189
 GameObject:
@@ -578,4 +598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   playerHp: 0
+  playerHandGo: []
+  handisUseCount: 0
+  handId: 2
   m_isUse: 0

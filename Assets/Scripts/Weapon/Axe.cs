@@ -7,19 +7,34 @@ public class Axe : Weapon
     [SerializeField]
     private float m_initLifeTime = 20.0f;
     [SerializeField]
-    private float m_initDamage = 2.0f;
+    private float m_initDamage = 5.0f;
 
     private GameObject Tips;
 
     private void Start()
     {
+        
         strName = "斧头";
         strDetail = "伤害巨大 范围较小";
     }
 
     void OnEnable()
     {
+        EventManager.me.AddEventListener("endgame", (object[] o) => {
+            isUse = true;
+            lifeTime = 0;
+            return null;
+        });
         AfterCreate();
+    }
+    private void OnDisable()
+    {
+        EventManager.me.RemoveEventListener("endgame", (object[] o) => {
+            isUse = true;
+            lifeTime = 0;
+            return null;
+        });
+        BeforeDestroy();
     }
 
     void Update()
@@ -28,20 +43,21 @@ public class Axe : Weapon
      
         if (isUse)
         {
+            Tips.SetActive(false);
             lifeTime -= Time.deltaTime;
             if (lifeTime <= 0)
             {
-                this.transform.parent = null;
-                ObjectPool.me.PutObject(this.gameObject, 0);
+                DestroyObject();
             }
         }
         else
         {
             Drop(!isLand);
         }
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isUse) {
             if (collision.tag == "Player")
@@ -50,11 +66,15 @@ public class Axe : Weapon
                 int id = collision.GetComponent<Player>().playerID;
                 if (userId!=id)
                 {
-                    collision.GetComponent<Player>().playerHp -= damage * Time.deltaTime;
-                   
+                    collision.GetComponent<Player>().BeHit(damage * Time.deltaTime);
                 }
             }
         }
+
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (!isUse)
         {
             if (collision.tag == "Land")
@@ -75,19 +95,32 @@ public class Axe : Weapon
         damage = m_initDamage;
         global.g_weaponCount++;
         Tips = transform.Find("Tips").gameObject;
+
+
     }
     public override void BeforeDestroy()
     {
+
         isUse = false;
         isBorn = false;
-        isLand = false;
+        isLand = false;    
+        global.g_weaponCount--;
         this.transform.parent = null;
-
         Tips = null;
+    }
+
+    public override void DestroyObject() {
+        BeforeDestroy();
+        ObjectPool.me.PutObject(this.gameObject, 0);
     }
     private void OnBecameVisible()
     {
-        if (!isUse && isBorn)
+        if ((!isUse) && isBorn)
+        {
+            isVisible = true;
+            Tips.SetActive(false);
+        }
+        else if (isUse && isBorn)
         {
             isVisible = true;
             Tips.SetActive(false);
@@ -95,15 +128,10 @@ public class Axe : Weapon
     }
     private void OnBecameInvisible()
     {
-        if (!isUse && isBorn)
+        if ((!isUse) && isBorn)
         {
             isVisible = false;
-            Tips.gameObject.SetActive(true);
-        }
-        else if (isUse)
-        {
-            isVisible = false;
-            Tips.SetActive(false);
+            Tips.SetActive(true);
         }
     }
 }

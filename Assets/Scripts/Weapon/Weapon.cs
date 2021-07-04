@@ -29,21 +29,19 @@ public class Weapon : MonoBehaviour
     public string strDetail="";
 
 
-
-
+    public float AIWeight = 0;
 
     public virtual void AfterCreate(){}
     public virtual void BeforeDestroy(){}
+    public virtual void DestroyObject() {}
+
 
     public void Drop(bool isdrop) {
         if (isdrop)
         {
             this.transform.position += new Vector3(0.0f,-5.0f*Time.deltaTime,0.0f);
         }
-
-        //Text text;
-        //text = GameObject.Find("text").GetComponent<Text>();
-        //text.text = "11";
     }
+
 
 }

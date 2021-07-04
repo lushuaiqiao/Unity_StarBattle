@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class Pick : MonoBehaviour
 {
-    private Transform weapon;
-    private GameObject details;
-    private Text textName;
-    private Text textDetails;
+    private Transform m_weapon;
+    private GameObject m_details;
+    private Text m_textName;
+    private Text m_textDetails;
     private void OnEnable()
     {
 
-        textName = GameObject.Find("Canvas/Weapon details/Name").GetComponent<Text>();
-        textDetails = GameObject.Find("Canvas/Weapon details/Details").GetComponent<Text>();
+        m_textName = GameObject.Find("Canvas/Weapon details/Name").GetComponent<Text>();
+        m_textDetails = GameObject.Find("Canvas/Weapon details/Details").GetComponent<Text>();
 
         this.gameObject.GetComponent<Collider2D>().enabled = true;
     }
@@ -29,13 +29,16 @@ public class Pick : MonoBehaviour
             if (!collision.GetComponent<PlayerPickUp>().m_isUse)
             {
                 global.g_weaponCount--;
-                weapon = this.transform.parent;
-                weapon.GetComponent<Weapon>().isUse = true;
-                weapon.GetComponent<Weapon>().userId = collision.transform.parent.GetComponent<Player>().playerID;
-                textName.text = weapon.GetComponent<Weapon>().strName;
-                textDetails.text = weapon.GetComponent<Weapon>().strDetail;
-                textName.transform.parent.GetComponent<WeaponDetails>().isrestart = true;
+                m_weapon = this.transform.parent;
+                m_weapon.GetComponent<Weapon>().isUse = true;
+                m_weapon.GetComponent<Weapon>().userId = collision.transform.parent.GetComponent<Player>().playerID;
 
+                if (m_weapon.GetComponent<Weapon>().userId == 0) {
+                    m_textName.text = m_weapon.GetComponent<Weapon>().strName;
+                    m_textDetails.text = m_weapon.GetComponent<Weapon>().strDetail;
+                    m_textName.transform.parent.GetComponent<WeaponDetails>().isrestart = true;
+                }
+            
                 this.gameObject.GetComponent<Collider2D>().enabled = false;
                 this.transform.parent.parent = collision.transform;
             }

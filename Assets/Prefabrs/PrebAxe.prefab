@@ -315,8 +315,11 @@ MonoBehaviour:
   fallSpeed: 0
   isVisible: 0
   isLand: 0
+  strName: 
+  strDetail: 
+  AIWeight: 1
   m_initLifeTime: 20
-  m_initDamage: 2
+  m_initDamage: 5
 --- !u!61 &1345034903
 BoxCollider2D:
   m_ObjectHideFlags: 0

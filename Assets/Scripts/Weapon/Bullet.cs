@@ -10,7 +10,18 @@ public class Bullet : Weapon
     private float m_initDamage = 2.0f;
     void OnEnable()
     {
+        EventManager.me.AddEventListener("endgame", (object[] o) => {
+            DestroyObject();
+            return null;
+        });
         AfterCreate();
+    }
+    private void OnDisable()
+    {
+        EventManager.me.RemoveEventListener("endgame", (object[] o) => {
+            DestroyObject();
+            return null;
+        });
     }
 
     void Update()
@@ -28,7 +39,7 @@ public class Bullet : Weapon
         }
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (isUse)
         {
@@ -37,9 +48,8 @@ public class Bullet : Weapon
                 int id = collision.GetComponent<Player>().playerID;
                 if (userId != id)
                 {
-                    collision.GetComponent<Player>().playerHp -= damage;
-                    BeforeDestroy();
-                    ObjectPool.me.PutObject(this.gameObject, 0);
+                    collision.GetComponent<Player>().BeHit(damage);
+                    DestroyObject();
                 }
             }
         }
@@ -55,5 +65,11 @@ public class Bullet : Weapon
     public override void BeforeDestroy()
     {
         isUse = false;
+    }
+
+    public override void DestroyObject()
+    {
+        BeforeDestroy();
+        ObjectPool.me.PutObject(this.gameObject, 0);
     }
 }

@@ -342,6 +342,9 @@ MonoBehaviour:
   fallSpeed: 0
   isVisible: 0
   isLand: 0
+  strName: 
+  strDetail: 
+  AIWeight: -1
   m_initLifeTime: 20
   m_initDamage: 2
 --- !u!1001 &4770855594894563720

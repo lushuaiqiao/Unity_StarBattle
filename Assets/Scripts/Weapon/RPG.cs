@@ -14,7 +14,21 @@ public class RPG : Weapon
     }
     void OnEnable()
     {
+        EventManager.me.AddEventListener("endgame", (object[] o) => {
+            isUse = true;
+            lifeTime = 0;
+            return null;
+        });
         AfterCreate();
+    }
+    private void OnDisable()
+    {
+        EventManager.me.RemoveEventListener("endgame", (object[] o) => {
+            isUse = true;
+            lifeTime = 0;
+            return null;
+        });
+        BeforeDestroy();
     }
 
     void Update()
@@ -22,11 +36,11 @@ public class RPG : Weapon
 
         if (isUse)
         {
+            Tips.SetActive(false);
             lifeTime -= Time.deltaTime;
             if (lifeTime <= 0)
             {
-                BeforeDestroy();
-                ObjectPool.me.PutObject(this.gameObject, 0);
+                DestroyObject();
             }
 
         }
@@ -61,32 +75,39 @@ public class RPG : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;
+
         this.transform.parent = null;
-     
+
+        global.g_weaponCount--;
         Tips = null;
+    }
+    public override void DestroyObject()
+    {
+        BeforeDestroy();
+        ObjectPool.me.PutObject(this.gameObject, 0);
     }
     private void OnBecameVisible()
     {
-        if (!isUse && isBorn)
+        if ((!isUse) && isBorn)
+        {
+            isVisible = true;
+            Tips.SetActive(false);
+        }
+        else if (isUse && isBorn)
         {
             isVisible = true;
             Tips.SetActive(false);
         }
 
-
     }
     private void OnBecameInvisible()
     {
-        if (!isUse && isBorn)
+        if ((!isUse) && isBorn)
         {
             isVisible = false;
-            Tips.gameObject.SetActive(true);
+            Tips.SetActive(true);
         }
-        else if (isUse)
-        {
-            isVisible = false;
-            Tips.SetActive(false);
-        }
+
     }
 
 

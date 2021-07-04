@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     public int playerID;
+    public int handisUseCount;
+    [HideInInspector]
+    public Dictionary<int, float> playerHand = new Dictionary<int, float>();
+    [HideInInspector]
     public float playerHp;
-  
-    void OnEnable()
+    [HideInInspector]
+    public Dictionary<int, GameObject> HandWeapon = new Dictionary<int, GameObject>();
+
+
+   void OnEnable()
     {
         AfterCreate();
+        EventManager.me.AddEventListener("endgame", (object[] o) => { playerHp = 0; return null; });
+    }
+    private void OnDisable()
+    {
+        EventManager.me.RemoveEventListener("endgame", (object[] o) => { playerHp = 0; return null; });
     }
     void Update()
     {
@@ -18,21 +31,40 @@ public class Player : MonoBehaviour
             PlayerDie();
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
 
-    }
     private void AfterCreate()
     {
-        playerHp = 1000.0f;
-
+        for (int i = 0; i < 5; i++)
+        {
+            if (playerHand.ContainsKey(i))
+            {
+                playerHand[i] = 0; 
+            }
+            else
+            {
+                playerHand.Add(i, 0);
+            }
+        }
+        playerHp = 10.0f;
+    }
+    private void BeforeDestroy()
+    {
+        global.g_leftPlayerId.Remove(playerID);
+        global.g_playerCount--;
+        playerHp = 10.0f;
+        foreach (var item in HandWeapon)
+        {
+            item.Value.transform.GetComponent<Weapon>().DestroyObject();
+        }
     }
     private void PlayerDie()
     {
         BeforeDestroy();
         ObjectPool.me.PutObject(this.gameObject, 0);
     }
-    private void BeforeDestroy() {
-        global.g_playerItems.Remove(playerID);
+    public void BeHit(float damage)
+    {
+        playerHp -= damage;
     }
+
 }

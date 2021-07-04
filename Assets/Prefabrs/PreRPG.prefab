@@ -342,6 +342,9 @@ MonoBehaviour:
   fallSpeed: 0
   isVisible: 0
   isLand: 0
+  strName: 
+  strDetail: 
+  AIWeight: -1.1
   m_initLifeTime: 20
 --- !u!1001 &5582124795400805819
 PrefabInstance:
