@@ -35,13 +35,13 @@ public class EventManager: MonoBehaviour
             }
             else
             {
-                Debug.Log("no events be matched 0");
+                Debug.LogError("没有匹配的事件方法，无法移除");
             }
             
         }
         else
         {
-            Debug.Log("no events be matched 1");
+            Debug.LogError("没有匹配的事件，无法移除");
         }
         if (eventList[eventName]==null)
         {
@@ -59,7 +59,7 @@ public class EventManager: MonoBehaviour
         }
         else
         {
-            Debug.Log("There is no event named " + eventname);
+            Debug.LogError("没有名为 " + eventname+"的事件");
             return null;
         }
 

@@ -64,7 +64,7 @@ public class FSMSystem
         StateID id = m_currentState.GetOutputState(trans);
         if (id == StateID.NULL_STATE)
         {
-            Debug.LogWarning("当前状态" + m_currentStateID + "无法根据转换条件" + trans + "发生转换");
+            Debug.LogError("当前状态" + m_currentStateID + "无法根据转换条件" + trans + "发生转换");
             return;
         }
 

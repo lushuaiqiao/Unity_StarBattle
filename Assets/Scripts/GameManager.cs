@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject createPlayer;
     public GameObject createWeapon;
     public GameObject rigCamera;
+    public GameObject fadeImage;
 
 
     private WaitForSeconds m_startWait;
@@ -51,12 +52,12 @@ public class GameManager : MonoBehaviour
         createPlayer.SetActive(true);
         createWeapon.SetActive(true);
         rigCamera.SetActive(true);
-
+        fadeImage.SetActive(true);
         StartCoroutine(GameLoop());
     }
     private IEnumerator GameLoop()
     {
-        yield return StartCoroutine(RoundStarting());   //等待一段时间后执行
+        yield return StartCoroutine(RoundStarting()); 
         yield return StartCoroutine(RoundPlaying());
         yield return StartCoroutine(RoundEnding());
 
@@ -75,9 +76,16 @@ public class GameManager : MonoBehaviour
 
         while (global.g_playerCount > 1)
         {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                global.g_leftPlayerId.Clear();
+                global.g_isWeaponCreate = false;
+                EventManager.me.TriggerEvent("endgame", null);
+                SceneManager.LoadScene("Title");
+            }
             yield return null;
         }
-        Debug.Log(global.g_playerCount);
+
         if (global.g_playerCount <= 1 && global.g_leftPlayerId.Count <= 1)
         {
             int winnerId = 0;
@@ -89,6 +97,7 @@ public class GameManager : MonoBehaviour
             m_textName.text = "游戏结束";
             m_textDetails.text = "获胜者是" + strid + "号星星！！";
             m_textName.transform.parent.GetComponent<WeaponDetails>().isrestart = true;
+            EventManager.me.TriggerEvent("fadein", null);
             yield return m_beforeEndWait;
         }
         else
@@ -96,6 +105,7 @@ public class GameManager : MonoBehaviour
             m_textName.text = "游戏结束";
             m_textDetails.text = "本局没有获胜者！！";
             m_textName.transform.parent.GetComponent<WeaponDetails>().isrestart = true;
+            EventManager.me.TriggerEvent("fadein", null);
             yield return m_beforeEndWait;
         }
 

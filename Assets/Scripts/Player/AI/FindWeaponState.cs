@@ -18,8 +18,6 @@ public class FindWeaponState : FSMState
 
     public override void Act(GameObject thisgo)
     {
-        Debug.Log("武器不够找武器");
-        Debug.Log(thisgo.GetComponent<Player>().handisUseCount);
         thisgo.GetComponent<PlayerControl>().Move(FindAction(thisgo));
         m_currTime += Time.deltaTime;
         if (m_currTime >= m_nextJumpTime)
@@ -36,7 +34,6 @@ public class FindWeaponState : FSMState
 
         if (thisgo.GetComponent<Player>().handisUseCount > 1)
         {
-            Debug.Log("武器够了，切换攻击模式");
             if (WeaponTrunWeigth(thisgo))
             {
                 fsm.PerformTransition(Transition.PREPARE_WEAPON_2);
@@ -64,15 +61,15 @@ public class FindWeaponState : FSMState
             }
 
         }
-        Debug.Log("权重是"+weightSum);
+  
         if (weightSum < 0)
         {
-            Debug.Log("攻击模式_2");
+
             return true;
         }
         else
         {
-            Debug.Log("攻击模式_1");
+
             return false;
         }
     }
@@ -122,7 +119,6 @@ public class FindWeaponState : FSMState
 
         if (m_targetWeapon == null)
         {
-            Debug.Log("当前没有可以拾取的武器_2");
             return 0;
         }
 

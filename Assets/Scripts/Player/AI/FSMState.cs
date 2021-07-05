@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//作为基类被其他类继承
 
-public enum Transition//转换条件
+
+public enum Transition
 {
     NULL_TRAN = 0,
     LOSE_WEAPON,
@@ -12,7 +12,7 @@ public enum Transition//转换条件
     HEALTH_LOSE
 }
 
-public enum StateID//状态id
+public enum StateID
 {
     NULL_STATE = 0,
     FIND_WEAPON,
@@ -20,7 +20,7 @@ public enum StateID//状态id
     ATTACK_2,
     ESCAPE
 }
-public abstract class FSMState//抽象类必须被实现
+public abstract class FSMState
 {
     protected StateID stateID;
     protected FSMSystem fsm;
@@ -36,9 +36,9 @@ public abstract class FSMState//抽象类必须被实现
 
     protected Dictionary<Transition, StateID> map = new Dictionary<Transition, StateID>();
 
-    public void AddTransition(Transition trans, StateID id)//添加状态
+    public void AddTransition(Transition trans, StateID id)
     {
-        //安全校验
+       
         if (trans == Transition.NULL_TRAN)
         {
             Debug.LogError("转换条件为空");
@@ -54,12 +54,12 @@ public abstract class FSMState//抽象类必须被实现
             Debug.LogError("添加转换条件时，" + trans + "已经存在于map中");
             return;
         }
-        //校验通过后添加map
+
         map.Add(trans, id);
 
     }
 
-    public void DeleteTransition(Transition trans)//删除状态
+    public void DeleteTransition(Transition trans)
     {
         if (trans == Transition.NULL_TRAN)
         {

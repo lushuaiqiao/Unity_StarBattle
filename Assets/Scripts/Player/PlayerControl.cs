@@ -21,10 +21,9 @@ public class PlayerControl : Player
     }
     private void OnEnable()
     {
-        //if (playerID != 0)
-        //{
-            InitFSM();
-        //}
+
+        InitFSM();
+
     }
 
     void LateUpdate()
@@ -53,7 +52,7 @@ public class PlayerControl : Player
     }
     public void Jump()
     {
-        //跳跃
+    
         if (m_isLand)
         {
             m_isLand = false;

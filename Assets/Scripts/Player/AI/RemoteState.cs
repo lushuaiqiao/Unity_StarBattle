@@ -31,7 +31,7 @@ public class RemoteState : FSMState
 
     public override void Reason(GameObject thisgo)
     {
-        Debug.Log(thisgo.GetComponent<Player>().handisUseCount);
+
         if (thisgo.GetComponent<Player>().handisUseCount < 1)
         {
             fsm.PerformTransition(Transition.LOSE_WEAPON);
@@ -114,7 +114,7 @@ public class RemoteState : FSMState
 
         float targetX = m_targetPlayer.transform.position.x;
         float playerX = thisgo.transform.position.x;
-        Debug.Log("攻击模式2启动中");
+
         if (targetX - safedistance > playerX || (targetX > playerX && targetX < playerX + safedistance))
         {
             return -1.0f;

@@ -80,9 +80,7 @@ public class Rifle : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;
-
-            this.transform.parent = null;
- 
+        this.transform.parent = null;
         global.g_weaponCount--;
         Tips = null;
     }

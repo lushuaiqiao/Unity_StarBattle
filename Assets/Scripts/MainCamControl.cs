@@ -7,6 +7,7 @@ public class MainCamControl : MonoBehaviour
 
     private Transform mainPlayerPos;
     private float m_dampTime = 0.2f;
+    private GameObject m_targetGameObject;
     private Vector2 m_cameraPos;
     private Vector3 m_moveVelocity;
 
@@ -14,29 +15,29 @@ public class MainCamControl : MonoBehaviour
     {
         global.g_mainCamera = this.GetComponent<Camera>();
         m_cameraPos = new Vector2(0, 0);
+        m_targetGameObject = null;
     }
 
     void LateUpdate()
     {
-  
-        if (mainPlayerPos == null)
+        if (m_targetGameObject == null)
         {
-            this.transform.position = new Vector3(0, 0, -5.0f);
-            mainPlayerPos = global.g_mainPlayer.transform;
+           ChangeCarmeraTarget();
         }
         else
         {
-            if (mainPlayerPos != global.g_mainPlayer.transform)
+            if (!m_targetGameObject.activeSelf)
             {
-                mainPlayerPos = global.g_mainPlayer.transform;
+                ChangeCarmeraTarget();
             }
-            FollowMain();
         }
+
+        FollowMain();
     }
 
-    void FollowMain()
+    private void FollowMain()
     {
-        if (m_cameraPos.y > mainPlayerPos.position.y+3.0f)
+        if (m_cameraPos.y > mainPlayerPos.position.y + 3.0f)
         {
             m_cameraPos.y = mainPlayerPos.position.y + 3.0f;
         }
@@ -44,9 +45,43 @@ public class MainCamControl : MonoBehaviour
         {
             m_cameraPos.y = mainPlayerPos.position.y - 3.0f;
         }
-        Vector3 target =  new Vector3(mainPlayerPos.position.x, m_cameraPos.y, -5.0f);
+        Vector3 target = new Vector3(mainPlayerPos.position.x, m_cameraPos.y, -5.0f);
         this.transform.position = Vector3.SmoothDamp(this.transform.position, target, ref m_moveVelocity, m_dampTime);
     }
+    private GameObject FindCarmeraTarget()
+    {
+        GameObject[] allplayer = GameObject.FindGameObjectsWithTag("Player");
+        GameObject targetplayer = null;
+        if (allplayer.Length<=0)
+        {
+            return null;
+        }
+        for (int i = 0; i < allplayer.Length; i++)
+        {
+            targetplayer = allplayer[i];
+            if (allplayer[i].GetComponent<Player>().playerID==0)
+            {
+                return targetplayer;
+            }
 
+        }
+        return targetplayer;
+
+    }
+    private void ChangeCarmeraTarget() {
+
+        if ((m_targetGameObject = FindCarmeraTarget()) != null)
+        {
+            if (mainPlayerPos != m_targetGameObject.transform)
+            {
+                mainPlayerPos = m_targetGameObject.transform;
+            }
+        }
+        else
+        {
+            mainPlayerPos.position = new Vector3(0, 0, -5.0f);
+        }
+
+    }
 
 }

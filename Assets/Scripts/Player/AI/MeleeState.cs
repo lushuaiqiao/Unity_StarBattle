@@ -33,7 +33,7 @@ public class MeleeState : FSMState
     public override void Reason(GameObject thisgo)
     {
 
-        Debug.Log(thisgo.GetComponent<Player>().handisUseCount);
+  
         if (thisgo.GetComponent<Player>().handisUseCount < 1)
         {
 
@@ -118,7 +118,7 @@ public class MeleeState : FSMState
         {
             return 0;
         }
-        Debug.Log("攻击模式1启动中");
+
         if (m_targetPlayer.transform.position.x > thisgo.transform.position.x)
         {
             return -1.0f;

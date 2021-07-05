@@ -337,6 +337,9 @@ MonoBehaviour:
   fallSpeed: 0
   isVisible: 0
   isLand: 0
+  strName: 
+  strDetail: 
+  AIWeight: 0
   m_sheildPower: 500
   m_initLifeTime: 10
 --- !u!1001 &1695471567823259784
@@ -415,6 +418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8897480708331842588, guid: 835e32857dc94264bb04405d29597cc9,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.93
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 835e32857dc94264bb04405d29597cc9, type: 3}

@@ -21,7 +21,7 @@ public class PlayerPickUp : Player
         m_coolDown = 0;
         m_isUse = false;
         this.gameObject.GetComponent<Collider2D>().enabled = false;
-        if (this.transform.childCount!=0)
+        if (this.transform.childCount>1)
         {
             this.transform.DetachChildren();
         }
