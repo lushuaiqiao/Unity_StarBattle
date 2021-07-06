@@ -1128,11 +1128,11 @@ MonoBehaviour:
   m_createHeight: 20
   m_isWork: 0
   weaponList:
+  - {fileID: 5575463614850646333, guid: b62b904862198ef4fa6f807779d0052a, type: 3}
+  - {fileID: 8963103960132032028, guid: e6724c692f4719e438852fbce6c9a83b, type: 3}
   - {fileID: 8585192532629151057, guid: 8685dd2f24a1b604c98a451b7ba41250, type: 3}
   - {fileID: 8145652318834326034, guid: c2a6773ec50c192499e79d281fb59d27, type: 3}
-  - {fileID: 5575463614850646333, guid: b62b904862198ef4fa6f807779d0052a, type: 3}
   - {fileID: 6554947038487525689, guid: 5f7c222206f06cd4e9f982bf472f5ff6, type: 3}
-  - {fileID: 8963103960132032028, guid: e6724c692f4719e438852fbce6c9a83b, type: 3}
 --- !u!1 &1691393148
 GameObject:
   m_ObjectHideFlags: 0

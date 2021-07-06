@@ -17,8 +17,7 @@ public class RemoteState : FSMState
     }
     public override void Act(GameObject thisgo)
     {
-
-        thisgo.GetComponent<PlayerControl>().Move(RemoteAttack(thisgo, 6.0f));
+        thisgo.GetComponent<PlayerControl>().Move(RemoteAttack(thisgo, 8.0f));
         m_currTime += Time.deltaTime;
         if (m_currTime >= m_nextJumpTime)
         {
@@ -36,7 +35,7 @@ public class RemoteState : FSMState
         {
             fsm.PerformTransition(Transition.LOSE_WEAPON);
         }
-        if (!WeaponTrunWeigth(thisgo))
+        if (!WeaponTrunWeigth(thisgo)&& thisgo.GetComponent<Player>().handisUseCount >= 1)
         {
             fsm.PerformTransition(Transition.PREPARE_WEAPON_1);
         }
@@ -114,14 +113,33 @@ public class RemoteState : FSMState
 
         float targetX = m_targetPlayer.transform.position.x;
         float playerX = thisgo.transform.position.x;
+ 
+   
 
-        if (targetX - safedistance > playerX || (targetX > playerX && targetX < playerX + safedistance))
+        if ((targetX - safedistance) > playerX)
         {
+    
             return -1.0f;
+        }
+        else if ((targetX + safedistance) < playerX)
+        {
+       
+            return 1.0f;
+        }
+        else if((playerX > targetX && playerX < (targetX + safedistance)))
+        {
+   
+            return -1.0f;
+        }
+        else if((playerX < targetX && playerX > (targetX - safedistance)))
+        {
+   
+            return 1.0f;
         }
         else
         {
-            return 1.0f;
+            return 0;
         }
+
     }
 }

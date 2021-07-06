@@ -111,6 +111,14 @@ public class PlayerControl : Player
             m_isLand = true;
         }
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Underground")
+        {
+            m_isLand = false;
+        }
+    }
+
 
     void InitFSM()
     {

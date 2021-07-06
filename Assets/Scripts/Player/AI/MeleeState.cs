@@ -40,7 +40,7 @@ public class MeleeState : FSMState
             fsm.PerformTransition(Transition.LOSE_WEAPON);
 
         }
-        if (WeaponTrunWeigth(thisgo))
+        if (WeaponTrunWeigth(thisgo) && thisgo.GetComponent<Player>().handisUseCount >= 1)
         {
             fsm.PerformTransition(Transition.PREPARE_WEAPON_2);
         }

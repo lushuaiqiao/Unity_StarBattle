@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator RoundStarting()
     {
         EventManager.me.TriggerEvent("resetgame", null);
-    
+        global.g_weaponCount = 0;
         global.g_isWeaponCreate = true;
 
         yield return m_startWait;
