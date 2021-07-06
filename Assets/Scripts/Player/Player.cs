@@ -48,13 +48,13 @@ public class Player : MonoBehaviour
                 playerHand.Add(i, 0);
             }
         }
-        playerHp = maxHp;
+        playerHp = 30.0f;
     }
     private void BeforeDestroy()
     {
         global.g_leftPlayerId.Remove(playerID);
         global.g_playerCount--;
-        playerHp = maxHp;
+        playerHp = 30.0f;
         foreach (var item in HandWeapon)
         {
             item.Value.transform.GetComponent<Weapon>().DestroyObject();
