@@ -1,2 +1,2 @@
 # Unity_StarBattle
-Game by unity
+Game made by unity
