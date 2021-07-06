@@ -20,6 +20,7 @@ public class Rifle : Weapon
         EventManager.me.AddEventListener("endgame", (object[] o) => {
             isUse = true;
             lifeTime = 0;
+
             return null;
         });
         AfterCreate();
@@ -29,6 +30,7 @@ public class Rifle : Weapon
         EventManager.me.RemoveEventListener("endgame", (object[] o) => {
             isUse = true;
             lifeTime = 0;
+      
             return null;
         });
         BeforeDestroy();
@@ -72,7 +74,7 @@ public class Rifle : Weapon
         isUse = false;
         lifeTime = m_initLifeTime;
         damage = m_initDamage;
-        global.g_weaponCount++;
+
         Tips = transform.Find("Tips").gameObject;
     }
     public override void BeforeDestroy()
@@ -81,7 +83,7 @@ public class Rifle : Weapon
         isBorn = false;
         isLand = false;
         this.transform.parent = null;
-        global.g_weaponCount--;
+
         Tips = null;
     }
     public override void DestroyObject()

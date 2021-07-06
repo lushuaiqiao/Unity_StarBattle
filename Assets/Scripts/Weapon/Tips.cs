@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tips : MonoBehaviour
 {
     public Camera m_camera;
-    public float m_space;
+    public float m_space; 
 
     private Weapon m_weapon;
     private float m_halfWidth;

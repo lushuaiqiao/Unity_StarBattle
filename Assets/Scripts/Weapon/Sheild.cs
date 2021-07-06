@@ -21,6 +21,7 @@ public class Sheild : Weapon
         EventManager.me.AddEventListener("endgame", (object[] o) => {
             isUse = true;
             lifeTime = 0;
+  
             return null;
         });
         AfterCreate();
@@ -30,6 +31,7 @@ public class Sheild : Weapon
         EventManager.me.RemoveEventListener("endgame", (object[] o) => {
             isUse = true;
             lifeTime = 0;
+   
             return null;
         });
         BeforeDestroy();
@@ -100,7 +102,7 @@ public class Sheild : Weapon
         isBorn = true;
         isUse = false;
         lifeTime = m_initLifeTime;
-        global.g_weaponCount++;
+  
         Tips = transform.Find("Tips").gameObject;
     }
     public override void BeforeDestroy()
@@ -112,7 +114,7 @@ public class Sheild : Weapon
         this.transform.parent = null;
 
         this.transform.parent = null;
-        global.g_weaponCount--;
+     
         Tips = null;
     }
     public override void DestroyObject()

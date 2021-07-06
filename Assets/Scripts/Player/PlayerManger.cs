@@ -35,7 +35,7 @@ public class PlayerManger : MonoBehaviour
             GameObject player = ObjectPool.me.GetObject(p, spawnPos[i], Quaternion.identity);
             global.g_playerCount = playerCount;
             player.GetComponent<Player>().playerID = i;
-            player.GetComponent<Player>().playerHp = 10.0f;
+            player.GetComponent<Player>().playerHp = 30.0f;
             player.GetComponent<Player>().handisUseCount = 0;
     
            global.g_leftPlayerId.Add(i);

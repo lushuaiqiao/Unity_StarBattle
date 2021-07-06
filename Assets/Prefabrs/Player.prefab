@@ -62,6 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   handisUseCount: 0
+  maxHp: 0
   playerHp: 0
   handId: 4
   m_isUse: 0
@@ -191,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   handisUseCount: 0
+  maxHp: 0
   playerHp: 0
   rotateSpeed: 100
   maxSpeed: 100
@@ -209,6 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 3
   handisUseCount: 0
+  maxHp: 30
   playerHp: 0
 --- !u!60 &1501327410191901850
 PolygonCollider2D:
@@ -392,6 +395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   handisUseCount: 0
+  maxHp: 0
   playerHp: 0
   handId: 3
   m_isUse: 0
@@ -457,6 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   handisUseCount: 0
+  maxHp: 0
   playerHp: 0
   handId: 0
   m_isUse: 0
@@ -522,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   handisUseCount: 0
+  maxHp: 0
   playerHp: 0
   handId: 1
   m_isUse: 0
@@ -587,6 +593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   handisUseCount: 0
+  maxHp: 0
   playerHp: 0
   handId: 2
   m_isUse: 0

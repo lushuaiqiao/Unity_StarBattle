@@ -23,6 +23,7 @@ public class Axe : Weapon
         EventManager.me.AddEventListener("endgame", (object[] o) => {
             isUse = true;
             lifeTime = 0;
+     
             return null;
         });
         AfterCreate();
@@ -32,6 +33,7 @@ public class Axe : Weapon
         EventManager.me.RemoveEventListener("endgame", (object[] o) => {
             isUse = true;
             lifeTime = 0;
+  
             return null;
         });
         BeforeDestroy();
@@ -93,7 +95,7 @@ public class Axe : Weapon
         isLand = false;
         lifeTime = m_initLifeTime;
         damage = m_initDamage;
-        global.g_weaponCount++;
+
         Tips = transform.Find("Tips").gameObject;
 
 
@@ -104,7 +106,7 @@ public class Axe : Weapon
         isUse = false;
         isBorn = false;
         isLand = false;    
-        global.g_weaponCount--;
+  
         this.transform.parent = null;
         Tips = null;
     }

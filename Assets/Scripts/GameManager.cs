@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
     {
         global.g_leftPlayerId.Clear();
         global.g_isWeaponCreate = false;
+        global.g_weaponCount = 0;
         EventManager.me.TriggerEvent("endgame", null);
         yield return m_endWait;
     }

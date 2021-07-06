@@ -52,7 +52,7 @@ public class WeaponCreate : MonoBehaviour
 
         int weaponType = Random.Range(0, weaponList.Length);
         GameObject weapon = ObjectPool.me.GetObject(weaponList[weaponType], spawnPos, Quaternion.identity);
-
+        global.g_weaponCount++;
     }
 
 }
